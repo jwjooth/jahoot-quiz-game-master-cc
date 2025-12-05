@@ -136,7 +136,7 @@ export default function PublicLanding() {
 
                 <button
                   onClick={handleGoogleLogin}
-                  className="w-full py-3 bg-white border border-gray-300 rounded-xl text-gray-700 font-semibold hover:bg-gray-50 hover:border-gray-400 transition-all flex items-center justify-center gap-3 shadow-sm"
+                  className="w-full py-3 bg-white border-2 border-gray-300 rounded-xl text-gray-700 font-semibold hover:bg-gray-50 hover:border-purple-500 hover:shadow-lg transition-all flex items-center justify-center gap-3"
                 >
                   <img 
                     src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" 

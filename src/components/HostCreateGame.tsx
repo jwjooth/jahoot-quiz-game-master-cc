@@ -215,7 +215,7 @@ export function HostCreateGame({ onCreateGame }: HostCreateGameProps) {
                     value={customQuizTitle}
                     onChange={(e) => setCustomQuizTitle(e.target.value)}
                     placeholder="Contoh: Latihan Soal Algoritma"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-5 py-3 rounded-xl border border-gray-300 shadow-sm bg-white focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all"
                 />
             </div>
 
@@ -240,7 +240,7 @@ export function HostCreateGame({ onCreateGame }: HostCreateGameProps) {
                             value={qText}
                             onChange={(e) => setQText(e.target.value)}
                             placeholder="Ketik pertanyaan di sini..."
-                            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-purple-500 outline-none bg-white"
+                            className="w-full px-5 py-3 rounded-xl border border-gray-300 shadow-sm bg-white focus:ring-2 focus:ring-purple-500 outline-none"
                         />
                     </div>
 
@@ -257,15 +257,16 @@ export function HostCreateGame({ onCreateGame }: HostCreateGameProps) {
                                     value={opt}
                                     onChange={(e) => handleOptionChange(idx, e.target.value)}
                                     placeholder={`Pilihan ${idx + 1}`}
-                                    className={`w-full pl-6 pr-12 py-3 rounded-xl border outline-none transition-all bg-white ${
-                                        qCorrect === idx 
-                                        ? 'border-green-500 ring-2 ring-green-100 bg-green-50' 
-                                        : 'border-gray-300 focus:border-purple-500'
-                                    }`}
+                                    className={`w-full pl-8 pr-14 py-3 rounded-xl border outline-none shadow-sm bg-white transition-all ${
+  qCorrect === idx 
+  ? 'border-green-500 ring-2 ring-green-100 bg-green-50' 
+  : 'border-gray-300 focus:border-purple-500'
+}`}
+
                                 />
                                 <button
                                     onClick={() => setQCorrect(idx)}
-                                    className={`absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-full transition-all ${
+                                    className={`absolute right-4 top-1/2 -translate-y-1/2 p-1.5 rounded-full transition-all ${
                                         qCorrect === idx 
                                         ? 'bg-green-500 text-white shadow-md scale-110' 
                                         : 'bg-gray-200 text-gray-400 hover:bg-gray-300'
