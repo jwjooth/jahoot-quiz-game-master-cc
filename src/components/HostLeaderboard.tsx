@@ -2,7 +2,7 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { ArrowRight, Crown, Medal, Trophy } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
-import { Player, Question } from '../App';
+import type { Player, Question } from '../types';
 import { db } from '../firebase/config';
 
 interface HostLeaderboardProps {

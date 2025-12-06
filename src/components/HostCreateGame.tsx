@@ -196,58 +196,77 @@ export function HostCreateGame({ onCreateGame }: HostCreateGameProps) {
           animate={{ opacity: 1, y: 0 }}
           className="w-full max-w-4xl bg-white rounded-3xl p-8 shadow-2xl"
         >
-          <div className="flex items-center gap-4 mb-6">
-            <button 
-                onClick={() => setIsCustomMode(false)}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-            >
-                <ArrowLeft className="w-6 h-6 text-gray-600" />
-            </button>
-            <h2 className="text-2xl font-bold text-gray-800">Buat Kuis Baru</h2>
-          </div>
 
-          <div className="space-y-6">
-            {/* Quiz Title Input */}
-            <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Judul Kuis</label>
+          
+            {/* Header */}
+            <div className="flex items-center gap-4 mb-6">
+              <button 
+                  onClick={() => setIsCustomMode(false)}
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              >
+                  <ArrowLeft className="w-6 h-6 text-gray-600" />
+              </button>
+              <h2 className="text-2xl font-bold text-gray-800">Buat Kuis Baru</h2>
+            </div>
+
+            <div className="space-y-6">
+              {/* Quiz Title Input */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2 ml-1 flex items-center gap-2">
+                  <span className="text-lg">📝</span>
+                  Judul Kuis
+                </label>
                 <input 
                     type="text" 
                     value={customQuizTitle}
                     onChange={(e) => setCustomQuizTitle(e.target.value)}
                     placeholder="Contoh: Latihan Soal Algoritma"
-                    className="w-full px-5 py-3 rounded-xl border border-gray-300 shadow-sm bg-white focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-6 py-4 rounded-2xl border-2 border-gray-300 shadow-sm bg-white focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none text-lg transition-all"
                 />
-            </div>
+              </div>
 
-            <div className="border-t border-gray-200 my-6"></div>
+              <div className="border-t border-gray-200 my-6"></div>
 
-            {/* Question Form */}
-            <div className={`p-6 rounded-2xl border ${editingIndex !== null ? 'bg-purple-50 border-purple-200' : 'bg-gray-50 border-gray-200'}`}>
-                <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                    {editingIndex !== null ? (
+              {/* Question Form */}
+              <div className={`p-6 rounded-2xl border-2 ${editingIndex !== null ? 'bg-purple-50 border-purple-300' : 'bg-gray-50 border-gray-200'}`}>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                      {editingIndex !== null ? (
                         <Pencil className="w-5 h-5 text-purple-600" />
-                    ) : (
+                      ) : (
                         <Plus className="w-5 h-5 text-purple-600" />
-                    )}
-                    {editingIndex !== null ? `Edit Pertanyaan #${editingIndex + 1}` : `Tambah Pertanyaan (${customQuestions.length} tersimpan)`}
-                </h3>
+                      )}
+                      {editingIndex !== null ? `Edit Pertanyaan #${editingIndex + 1}` : `Tambah Pertanyaan`}
+                  </h3>
+                  <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-lg font-semibold text-sm border border-purple-200">
+                    {customQuestions.length} Tersimpan
+                  </span>
+                </div>
                 
                 <div className="space-y-4">
                     <div>
-                        <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Pertanyaan</label>
+                        <label className="block text-xs font-bold text-gray-700 uppercase mb-2 ml-1 flex items-center gap-1">
+                          <span className="text-base">❓</span>
+                          Pertanyaan
+                        </label>
                         <input 
                             type="text" 
                             value={qText}
                             onChange={(e) => setQText(e.target.value)}
                             placeholder="Ketik pertanyaan di sini..."
-                            className="w-full px-5 py-3 rounded-xl border border-gray-300 shadow-sm bg-white focus:ring-2 focus:ring-purple-500 outline-none"
+                            className="w-full px-6 py-4 rounded-2xl border-2 border-gray-300 shadow-sm bg-white focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none text-lg transition-all"
                         />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label className="block text-xs font-bold text-gray-700 uppercase mb-2 ml-1 flex items-center gap-1">
+                          <span className="text-base">✅</span>
+                          Pilihan Jawaban
+                        </label>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {qOptions.map((opt, idx) => (
                             <div key={idx} className="relative group">
-                                <div className={`absolute left-0 top-0 bottom-0 w-2 rounded-l-xl ${
+                                <div className={`absolute left-0 top-0 bottom-0 w-2 rounded-l-2xl ${
                                     idx === 0 ? 'bg-red-500' : 
                                     idx === 1 ? 'bg-blue-500' : 
                                     idx === 2 ? 'bg-yellow-500' : 'bg-green-500'
@@ -257,12 +276,11 @@ export function HostCreateGame({ onCreateGame }: HostCreateGameProps) {
                                     value={opt}
                                     onChange={(e) => handleOptionChange(idx, e.target.value)}
                                     placeholder={`Pilihan ${idx + 1}`}
-                                    className={`w-full pl-8 pr-14 py-3 rounded-xl border outline-none shadow-sm bg-white transition-all ${
-  qCorrect === idx 
-  ? 'border-green-500 ring-2 ring-green-100 bg-green-50' 
-  : 'border-gray-300 focus:border-purple-500'
-}`}
-
+                                    className={`w-full px-6 py-4 rounded-2xl border-2 border-gray-300 shadow-sm bg-white focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none text-lg transition-all ${
+                                      qCorrect === idx 
+                                      ? 'border-green-500 ring-2 ring-green-100 bg-green-50' 
+                                      : 'border-gray-300 focus:border-purple-500'
+                                    }`}
                                 />
                                 <button
                                     onClick={() => setQCorrect(idx)}
@@ -289,14 +307,14 @@ export function HostCreateGame({ onCreateGame }: HostCreateGameProps) {
                                 setQOptions(['', '', '', '']);
                                 setQCorrect(0);
                             }}
-                            className="px-6 py-3 bg-gray-200 text-gray-600 rounded-xl font-semibold hover:bg-gray-300 transition-colors"
+                            className="px-6 py-3 bg-gray-200 text-gray-600 rounded-2xl font-semibold hover:bg-gray-300 transition-colors"
                         >
                             Batal
                         </button>
                     )}
                     <button 
                         onClick={handleAddQuestion}
-                        className="flex-1 bg-purple-600 text-white py-3 rounded-xl font-semibold hover:bg-purple-700 transition-colors flex items-center justify-center gap-2 shadow-md active:scale-[0.98]"
+                        className="flex-1 bg-purple-600 text-white py-3 rounded-2xl font-semibold hover:bg-purple-700 transition-colors flex items-center justify-center gap-2 shadow-md active:scale-[0.98]"
                     >
                         {editingIndex !== null ? (
                             <>
@@ -309,15 +327,15 @@ export function HostCreateGame({ onCreateGame }: HostCreateGameProps) {
                         )}
                     </button>
                 </div>
-            </div>
+              </div>
 
-            {/* List of Added Questions Preview */}
-            {customQuestions.length > 0 && (
+              {/* List of Added Questions Preview */}
+              {customQuestions.length > 0 && (
                 <div className="mt-4 space-y-2">
                     <p className="text-sm text-gray-500 font-medium">Daftar Pertanyaan:</p>
                     <div className="max-h-64 overflow-y-auto space-y-2 pr-2">
                         {customQuestions.map((q, idx) => (
-                            <div key={idx} className={`flex justify-between items-center p-3 rounded-lg border transition-colors ${
+                            <div key={idx} className={`flex justify-between items-center p-3 rounded-2xl border transition-colors ${
                                 editingIndex === idx 
                                 ? 'bg-purple-100 border-purple-300 ring-1 ring-purple-300' 
                                 : 'bg-gray-50 border-gray-100 hover:border-purple-200'
@@ -343,14 +361,14 @@ export function HostCreateGame({ onCreateGame }: HostCreateGameProps) {
                         ))}
                     </div>
                 </div>
-            )}
+              )}
 
-            {/* Final Action Button - GANTI JADI SIMPAN KUIS */}
-            <div className="pt-4">
+              {/* Final Action Button - SIMPAN KUIS */}
+              <div className="pt-4">
                 <button 
                     onClick={handleSaveQuiz}
                     disabled={customQuestions.length === 0 || isCreating}
-                    className={`w-full py-4 rounded-xl font-bold text-lg shadow-xl transition-all flex items-center justify-center gap-2 ${
+                    className={`w-full py-4 rounded-2xl font-bold text-lg shadow-xl transition-all flex items-center justify-center gap-2 ${
                         customQuestions.length > 0 
                         ? 'bg-gradient-to-r from-green-400 to-emerald-500 text-white hover:shadow-2xl hover:scale-[1.02]' 
                         : 'bg-gray-200 text-gray-400 cursor-not-allowed'
@@ -365,12 +383,15 @@ export function HostCreateGame({ onCreateGame }: HostCreateGameProps) {
                         </>
                     )}
                 </button>
+              </div>
             </div>
           </div>
         </motion.div>
       </div>
     );
   }
+
+  
 
   // --- RENDER TEMPLATE SELECTOR MODE ---
   return (

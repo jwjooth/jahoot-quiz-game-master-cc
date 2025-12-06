@@ -1,6 +1,6 @@
 import { Award, Star, TrendingUp, Trophy } from 'lucide-react';
 import { motion } from 'motion/react';
-import { Player } from '../App';
+import type { Player } from '../types';
 
 interface PlayerResultsProps {
   player: Player;

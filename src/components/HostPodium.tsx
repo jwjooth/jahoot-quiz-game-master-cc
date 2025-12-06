@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { Trophy, Crown, Medal, Star, RotateCcw } from 'lucide-react';
-import { Player } from '../App';
+import type { Player } from '../types';
 
 interface HostPodiumProps {
   players: Player[];

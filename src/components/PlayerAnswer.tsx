@@ -2,7 +2,7 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { Check, Clock } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
-import { Question } from '../App';
+import type { Question } from '../types';
 import { db } from '../firebase/config';
 import { submitAnswer } from '../firebase/gameService';
 import { PlayerIntermesso } from './PlayerIntermesso';
